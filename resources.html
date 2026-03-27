@@ -568,7 +568,7 @@
       <h1 class="page-title">Digital Library</h1>
 
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search for practice question sets, solutions, or slides..."
+        <input type="text" id="searchInput" placeholder="Search for practice question sets, solutions, textbooks, videos, notices, or teachers guide..."
           onkeyup="filterItems()">
       </div>
 
@@ -590,11 +590,11 @@
           <button class="filter-btn" data-type="practise_questions_sets"
             onclick="setTypeFilter('practise_questions_sets')">Practice / Question Sets</button>
           <button class="filter-btn" data-type="solutions" onclick="setTypeFilter('solutions')">Solutions</button>
-          <button class="filter-btn" data-type="slides" onclick="setTypeFilter('slides')">Slides</button>
+          <button class="filter-btn" data-type="teachers_guide" onclick="setTypeFilter('teachers_guide')">Teachers guide</button>
           <button class="filter-btn" data-type="videos" onclick="setTypeFilter('videos')">Videos</button>
           <button class="filter-btn" data-type="curriculum" onclick="setTypeFilter('curriculum')">Curriculum</button>
           <button class="filter-btn" data-type="textbook" onclick="setTypeFilter('textbook')">Textbooks</button>
-          <button class="filter-btn" data-type="grid" onclick="setTypeFilter('grid')">Grid</button>
+          <button class="filter-btn" data-type="misc" onclick="setTypeFilter('misc')">Misc</button>
           <button class="filter-btn" data-type="notice" onclick="setTypeFilter('notice')">Notices</button>
         </div>
       </div>
@@ -659,15 +659,17 @@
      * {
      *   title: "Name of File",
      *   description: "Brief description of what it is",
-     *   category: "curriculum", // Choose: practise_questions_sets, solutions, slides, videos, curriculum, textbook, grid, notice
+     *   category: "curriculum", // Choose: practise_questions_sets, solutions, teachers_guide, videos, curriculum, textbook, misc, notice
      *   class: "10", // Choose: 10, 9, 8, General
      *   path: "documents/curriculum/filename.pdf", 
-     *   icon: "📜", // Choose: 📜(Curriculum), 📕(Book), 📂(Solution), 📽️(Slide), 🎬(Video), 📊(Grid), 🔔(Notice)
+     *   icon: "📜", // Choose: 📜(Curriculum), 📕(Book), 📂(Solution), 📽️(Teachers Guide), 🎬(Video), 📊(Misc), 🔔(Notice)
      *   size: "1.2 MB"
      * },
      */
     const resources = [
       // Questions
+      { title: "विज्ञान तथा प्रविधि कक्षा 8 PartA Textbook नेपाली माध्यम", description: "विज्ञान तथा प्रविधि कक्षा 8 PartA Textbook नेपाली माध्यम", category: "textbook", class: "10", path: "documents/textbook/nepalimedium/विज्ञान_तथा_प्रविधि_कक्षा_8_PartA_Textbook_नेपाली_माध्यम.pdf", icon: "📝", size: "0.6 MB" },
+
       { title: "Pre-SEE 2082 PABSON Set A Science and Technology", description: "PABSON Set A Pre-SEE Exam 2082 practice question sets.", category: "practise_questions_sets", class: "10", path: "documents/practice/PABSON/Pre-SEE_2082_SET_A-Science_and_Technology_PABSON-Questions.pdf", icon: "📝", size: "0.6 MB" },
       { title: "Pre-SEE 2082 PABSON Set A Science and Technology Answer key", description: "PABSON Set A Pre-SEE Exam 2082 Answer key.", category: "practise_questions_sets", class: "10", path: "documents/practice/PABSON/SET_A_Science_and_Technology_Pre-SEE_2082_PABSON_Answer_Key.pdf", icon: "📝", size: "0.6 MB" },
       { title: "Pre-SEE 2082 PABSON Set B Science and Technology", description: "PABSON Set B Pre-SEE Exam 2082 practice question sets.", category: "practise_questions_sets", class: "10", path: "documents/practice/PABSON/Pre-SEE_2082_SET_B-Science_and_Technology_PABSON_Questions.pdf", icon: "📝", size: "2 MB" },
@@ -719,8 +721,8 @@
       { title: "SEE Model Set 3 Solution 2080", description: "SEE Class 10 Model Set 3 Solution.", category: "solutions", class: "10", path: "documents/solutions/SEE_Model_Set_3_Solution_2080.pdf", icon: "📂", size: "0.8 MB" },
       { title: "SEE Solution of All Province", description: "Complete compilation of SEE Class 10 solutions for all provinces.", category: "solutions", class: "10", path: "documents/solutions/SEE_Solution_of_All_Province_and_Grade_Increment_2080.pdf", icon: "📂", size: "5.5 MB" },
 
-      // Slides
-      { title: "10-Pressure Presentation", description: "Interactive PowerPoint presentation on the Pressure chapter.", category: "slides", class: "10", path: "documents/slides/10-Pressure.pptx", icon: "📽️", size: "1.4 MB" },
+      // teachers_guide
+      { title: "TG Grade 8 Science", description: "Teacher Guide for Grade 8 Science.", category: "teachers_guide", class: "10", path: "documents/teachersguide/TG_Grade_8_Science.pdf", icon: "📽️", size: "1.4 MB" },
 
       // Videos
       { title: "NCED Class 10 Science Nepali Medium", description: "NCED Youtube video PlayList Class 10 Science Nepali Medium", category: "videos", class: "10", path: "https://youtube.com/playlist?list=PLVOHiHZt8InLYjO3zlgtE6pUkrFy2iTQ4&si=YLQz12wOAGBdMq9p", icon: "🎬", size: "YouTube" },
@@ -739,10 +741,12 @@
       { title: "Farewell programme of Yam Nath Poudel", description: "Farewell programme of Yam Nath Poudel by Sharada S.S., Mainapokhar, Bardiya ", category: "videos", class: "General", path: "https://www.youtube.com/watch?v=4_2ciM9KJx0&t=48s", icon: "🎬", size: "YouTube" },
      
       { title: "BIHANISAMBAD 2079-11-10  With Yam Nath Poudel", description: "Describing about STAN by President of Lumbini Province Yam Nath Poudel ", category: "videos", class: "General", path: "https://www.youtube.com/watch?v=J2xPyjTPXC0", icon: "🎬", size: "YouTube" },
-
+      
+      
       { title: "Pressure & Its Effects", description: "Video demonstration and explanation of pressure principles.", category: "videos", class: "10", path: "https://www.youtube.com/watch?v=GX-OrO8y8L0", icon: "🎬", size: "YouTube" }
     ];
 
+      
     let currentType = 'all';
     let currentClass = 'all';
 
