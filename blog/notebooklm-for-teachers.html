@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
   <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@100..900&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --ink: #050810;
@@ -20,8 +23,17 @@
       --font-serif: 'Cormorant Garamond', serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { font-size: 110%; scroll-behavior: smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 110%;
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--ink);
       color: var(--white);
@@ -205,7 +217,9 @@
     }
 
     @media (max-width: 900px) {
-      .nav-links, .nav-cta {
+
+      .nav-links,
+      .nav-cta {
         display: none;
       }
 
@@ -216,8 +230,12 @@
     }
 
     /* ══ ARTICLE LAYOUT ══ */
-    article { max-width: 800px; margin: 4rem auto; padding: 0 5%; }
-    
+    article {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 5%;
+    }
+
     .hero-img {
       width: 100%;
       height: 400px;
@@ -227,14 +245,45 @@
       border: 1px solid var(--glass-border);
     }
 
-    .meta { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
-    h1 { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: 2rem; }
-    
-    .intro { font-size: 1.25rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 3rem; font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; }
+    .meta {
+      color: var(--gold);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
 
-    section { margin-bottom: 4rem; }
-    h2 { font-family: var(--font-serif); font-size: 2.2rem; color: var(--gold2); margin-bottom: 1.5rem; }
-    p { margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.8); }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    .intro {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 3rem;
+      font-style: italic;
+      border-left: 3px solid var(--gold);
+      padding-left: 1.5rem;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--gold2);
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
 
     .feature-box {
       background: var(--glass);
@@ -243,10 +292,21 @@
       border-radius: 16px;
       margin: 2rem 0;
     }
-    .feature-box h4 { color: var(--gold); margin-bottom: 1rem; }
 
-    article ul { margin-bottom: 2rem; padding-left: 1.5rem; }
-    article li { margin-bottom: 0.8rem; color: rgba(255, 255, 255, 0.8); }
+    .feature-box h4 {
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    article ul {
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+    }
+
+    article li {
+      margin-bottom: 0.8rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
 
     /* ══ FOOTER ══ */
     footer {
@@ -332,9 +392,10 @@
       left: 0;
       width: 100%;
       height: 3px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
       z-index: 1001;
     }
+
     #progress-bar {
       height: 100%;
       width: 0%;
@@ -361,6 +422,7 @@
       border: 1px solid var(--glass-border);
       border-radius: 16px;
     }
+
     .toc-aside h5 {
       font-family: var(--font-serif);
       font-size: 1.2rem;
@@ -369,8 +431,16 @@
       border-bottom: 1px solid rgba(200, 168, 75, 0.2);
       padding-bottom: 0.5rem;
     }
-    .toc-aside ul { list-style: none; padding: 0; }
-    .toc-aside li { margin-bottom: 0.8rem; }
+
+    .toc-aside ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .toc-aside li {
+      margin-bottom: 0.8rem;
+    }
+
     .toc-aside a {
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.5);
@@ -378,7 +448,11 @@
       transition: color 0.2s;
       display: block;
     }
-    .toc-aside a.active, .toc-aside a:hover { color: var(--gold2); }
+
+    .toc-aside a.active,
+    .toc-aside a:hover {
+      color: var(--gold2);
+    }
 
     .share-aside {
       position: sticky;
@@ -388,6 +462,7 @@
       flex-direction: column;
       gap: 1rem;
     }
+
     .share-btn {
       width: 40px;
       height: 40px;
@@ -402,11 +477,20 @@
       transition: all 0.3s;
       font-size: 1.1rem;
     }
-    .share-btn:hover { background: var(--gold); color: var(--ink); transform: scale(1.1); }
+
+    .share-btn:hover {
+      background: var(--gold);
+      color: var(--ink);
+      transform: scale(1.1);
+    }
 
     /* ══ CONTENT BOXES ══ */
-    article { max-width: 820px; margin: 0; padding: 0; }
-    
+    article {
+      max-width: 820px;
+      margin: 0;
+      padding: 0;
+    }
+
     .edu-table {
       width: 100%;
       border-collapse: collapse;
@@ -416,6 +500,7 @@
       overflow: hidden;
       border: 1px solid var(--glass-border);
     }
+
     .edu-table th {
       background: rgba(200, 168, 75, 0.1);
       color: var(--gold);
@@ -424,11 +509,12 @@
       font-family: var(--font-serif);
       font-size: 1.1rem;
     }
+
     .edu-table td {
       padding: 1rem;
       border-bottom: 1px solid var(--glass-border);
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
     }
 
     /* ══ ANIMATIONS ══ */
@@ -437,6 +523,7 @@
       transform: translateY(30px);
       transition: all 0.8s ease-out;
     }
+
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
@@ -451,6 +538,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .teacher-box::before {
       content: '🎓 For Teachers';
       position: absolute;
@@ -464,6 +552,7 @@
       text-transform: uppercase;
       border-bottom-left-radius: 12px;
     }
+
     .teacher-box h4 {
       color: var(--gold);
       margin-bottom: 1rem;
@@ -483,10 +572,27 @@
       margin: 2rem 0;
       transition: transform 0.2s;
     }
-    .doc-link:hover { transform: translateX(10px); }
-    .doc-icon { font-size: 2rem; color: var(--gold); }
-    .doc-info h6 { color: var(--white); font-size: 1rem; margin-bottom: 2px; }
-    .doc-info span { font-size: 0.75rem; color: var(--gold); opacity: 0.8; }
+
+    .doc-link:hover {
+      transform: translateX(10px);
+    }
+
+    .doc-icon {
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .doc-info h6 {
+      color: var(--white);
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+
+    .doc-info span {
+      font-size: 0.75rem;
+      color: var(--gold);
+      opacity: 0.8;
+    }
 
     /* ══ MOBILE ADAPTS ══ */
     @media (max-width: 1100px) {
@@ -494,9 +600,13 @@
         grid-template-columns: 1fr;
         gap: 2rem;
       }
-      .toc-aside, .share-aside { display: none; }
+
+      .toc-aside,
+      .share-aside {
+        display: none;
+      }
     }
-    
+
     /* ══ BOTTOM SHARE ══ */
     .bottom-share {
       display: flex;
@@ -513,15 +623,22 @@
       overflow: hidden;
       margin: 3rem 0;
     }
+
     .doc-viewer-header {
       padding: 1rem 1.5rem;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       border-bottom: 1px solid var(--glass-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .doc-viewer-header span { font-weight: 600; font-size: 0.9rem; color: var(--gold2); }
+
+    .doc-viewer-header span {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--gold2);
+    }
+
     .open-full-btn {
       background: var(--gold);
       color: var(--ink);
@@ -532,13 +649,25 @@
       font-weight: 700;
       transition: 0.3s;
     }
-    .open-full-btn:hover { background: var(--white); }
+
+    .open-full-btn:hover {
+      background: var(--white);
+    }
 
     /* ══ ANIMATIONS ══ */
-    .rv { opacity: 0; transform: translateY(30px); transition: 0.8s; }
-    .rv.vis { opacity: 1; transform: translateY(0); }
+    .rv {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.8s;
+    }
+
+    .rv.vis {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
+
 <body>
   <!-- Reading Progress Bar -->
   <div class="progress-wrap">
@@ -555,23 +684,23 @@
   </div>
 
   <!-- ══ NAV ══ -->
-    <nav id="nav">
-      <a class="nav-logo" href="../index.html#home">
-        <img src="../images/logo.svg" alt="YNP Logo" loading="lazy" />
-        Yamnath Poudel<em></em>
-      </a>
-      <ul class="nav-links">
-        <li><a href="../index.html#home">Home</a></li>
-        <li><a href="../resources.html">Resources</a></li>
-        <li><a href="../links.html">Useful Links</a></li>
-        <li><a href="../tools.html">Useful Tools</a></li>
-        <li><a href="../blog.html" style="color:var(--gold)">Blog</a></li>
-      </ul>
-      <a href="../contact.html" class="nav-cta">Contact</a>
-      <button class="hbtn" id="hbtn" onclick="toggleMob()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
+  <nav id="nav">
+    <a class="nav-logo" href="../index.html#home">
+      <img src="../images/logo.svg" alt="YNP Logo" loading="lazy" />
+      Yamnath Poudel<em></em>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#home">Home</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../links.html">Useful Links</a></li>
+      <li><a href="../tools.html">Useful Tools</a></li>
+      <li><a href="../blog.html" style="color:var(--gold)">Blog</a></li>
+    </ul>
+    <a href="../contact.html" class="nav-cta">Contact</a>
+    <button class="hbtn" id="hbtn" onclick="toggleMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
   <div style="height: 60px;"></div> <!-- Spacer -->
 
@@ -592,18 +721,22 @@
     <main>
       <article>
         <img src="../images/notebooklm_header.png" alt="NotebookLM Study Buddy" class="hero-img rv">
-        
+
         <div class="meta rv">Study Tech • March 23, 2026</div>
         <h1 class="rv">NotebookLM: Your New <em>AI Study Buddy</em></h1>
-        
-        <p class="intro rv">Do you find science textbooks hard to read? Imagine a smart friend who has read every page and can answer any question about them. That’s NotebookLM!</p>
+
+        <p class="intro rv">Do you find science textbooks hard to read? Imagine a smart friend who has read every page
+          and can answer any question about them. That’s NotebookLM!</p>
 
         <section id="what-is-it" class="reveal">
           <div class="edu-badge">STUDY TECH</div>
           <h2>What is NotebookLM, Exactly?</h2>
-          <p>Imagine having a <strong>time machine</strong> for your study sessions. NotebookLM is like a super-smart friend who has read every single page of your textbooks and can answer any question about them in seconds.</p>
-          <p>Unlike regular AI (which sometimes makes things up), NotebookLM <em>only</em> looks at the documents you give it. It’s "grounded" in your facts!</p>
-          
+          <p>Imagine having a <strong>time machine</strong> for your study sessions. NotebookLM is like a super-smart
+            friend who has read every single page of your textbooks and can answer any question about them in seconds.
+          </p>
+          <p>Unlike regular AI (which sometimes makes things up), NotebookLM <em>only</em> looks at the documents you
+            give it. It’s "grounded" in your facts!</p>
+
           <table class="edu-table">
             <thead>
               <tr>
@@ -630,8 +763,9 @@
 
         <section id="why-students" class="reveal">
           <h2>Why Students (and Teachers) Love It</h2>
-          <p>Whether you're a Class 10 student preparing for SEE or a Science Teacher preparing a lesson plan, NotebookLM is your secret weapon.</p>
-          
+          <p>Whether you're a Class 10 student preparing for SEE or a Science Teacher preparing a lesson plan,
+            NotebookLM is your secret weapon.</p>
+
           <div class="teacher-box">
             <h4>A Teacher's Superpower: Lesson Planning</h4>
             <p>Teachers, you can upload your curriculum or a research paper, and ask NotebookLM to:</p>
@@ -642,27 +776,33 @@
             </ul>
           </div>
 
-          <p>For students, it's about <strong>saving time</strong>. You can ask: <em>"What are the 3 most important points in the Newton's Laws chapter?"</em> and it will find them instantly.</p>
+          <p>For students, it's about <strong>saving time</strong>. You can ask: <em>"What are the 3 most important
+              points in the Newton's Laws chapter?"</em> and it will find them instantly.</p>
         </section>
 
         <section id="video-guide" class="rv">
           <h2>See it in Action</h2>
           <div class="video-container">
             <!-- Learning about NotebookLM -->
-            <iframe src="https://www.youtube.com/embed/EOmgC3-hznM" title="NotebookLM Tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/EOmgC3-hznM" title="NotebookLM Tutorial"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
           </div>
         </section>
 
         <section id="how-to-start" class="rv">
           <h2>How to Start (4 Easy Steps)</h2>
           <ul>
-            <li><strong>Step 1:</strong> Go to <a href="https://notebooklm.google/" target="_blank" style="color:var(--gold)">notebooklm.google</a>.</li>
+            <li><strong>Step 1:</strong> Go to <a href="https://notebooklm.google/" target="_blank"
+                style="color:var(--gold)">notebooklm.google</a>.</li>
             <li><strong>Step 2:</strong> Upload a PDF of your science chapter or your own hand-written notes.</li>
-            <li><strong>Step 3:</strong> Ask a question like: "Explain the Newton's Third Law with an example from this paper."</li>
+            <li><strong>Step 3:</strong> Ask a question like: "Explain the Newton's Third Law with an example from this
+              paper."</li>
             <li><strong>Step 4:</strong> Click "Generate" on the Note Guide to get your AI Podcast!</li>
           </ul>
         </section>
 
+        <!-- Learning about NotebookLM
         <section id="downloads" class="rv">
           <h2>Resources for You</h2>
           <div class="doc-viewer-container">
@@ -673,6 +813,7 @@
             <iframe src="../documents/practice/10_math_english_practise.pdf#toolbar=0" width="100%" height="600px" style="border:none;"></iframe>
           </div>
         </section>
+         -->
 
         <!-- Bottom Share -->
         <div class="bottom-share rv">
@@ -761,14 +902,14 @@
 
     /* Clean URLs */
     if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('.html')) {
-        const cleanUrl = window.location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
-        window.history.replaceState(null, '', cleanUrl + window.location.search);
+      const cleanUrl = window.location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+      window.history.replaceState(null, '', cleanUrl + window.location.search);
     }
 
     // Reveal animation
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add('vis');
+        if (entry.isIntersecting) entry.target.classList.add('vis');
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.rv').forEach(el => obs.observe(el));
@@ -788,4 +929,5 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
+
 </html>
