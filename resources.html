@@ -237,15 +237,15 @@
 
     /* ══ HERO/CONTROLS ══ */
     .controls-sec {
-      padding: 2rem clamp(1.2rem, 5vw, 5rem) 1rem;
+      padding: 2.5rem clamp(1.2rem, 5vw, 5rem) 1.5rem;
       max-width: 1400px;
       margin: 0 auto;
     }
 
     .page-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      margin-bottom: 0.5rem;
+      font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+      margin-bottom: 1.3rem;
       background: linear-gradient(135deg, #fff, var(--gold2));
       -webkit-background-clip: text;
       background-clip: text;
@@ -256,7 +256,7 @@
       width: 100%;
       max-width: 600px;
       position: relative;
-      margin-bottom: 1rem;
+      margin-bottom: 1.3rem;
     }
 
     .search-bar input {
@@ -318,7 +318,7 @@
     }
 
     .filter-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     /* ══ GRID ══ */
@@ -381,10 +381,12 @@
     }
 
     .file-info h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      margin-bottom: 0.4rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
       color: #fff;
+      line-height: 1.4;
     }
 
     .file-class {
@@ -538,9 +540,9 @@
   <div id="mob">
     <a href="index.html#home" onclick="closeMob()">Home</a>
     <a href="resources.html" onclick="closeMob()">Resources</a>
-    <a href="links.html" onclick="closeMob()">Useful Links</a>
-    <a href="tools.html" onclick="closeMob()">Useful Tools</a>
-    <a href="blog.html" onclick="closeMob()">Blog</a>
+    <a href="links.html" onclick="closeMob()">Links</a>
+    <a href="tools.html" onclick="closeMob()">Tools</a>
+    <a href="labs.html" onclick="closeMob()">Virtual Labs</a>
     <a href="contact.html" onclick="closeMob()">Contact</a>
   </div>
 
@@ -553,9 +555,9 @@
     <ul class="nav-links">
       <li><a href="index.html#home">Home</a></li>
       <li><a href="resources.html" style="color:var(--gold)">Resources</a></li>
-      <li><a href="links.html">Useful Links</a></li>
-      <li><a href="tools.html">Useful Tools</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="links.html">Links</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="labs.html">Virtual Labs</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Contact</a>
     <button class="hbtn" id="hbtn" onclick="toggleMob()" aria-label="Menu">
@@ -569,7 +571,8 @@
       <h1 class="page-title">Digital Library</h1>
 
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search for practice question sets, solutions, textbooks, videos, notices, or teachers guide..."
+        <input type="text" id="searchInput"
+          placeholder="Search for practice question sets, solutions, textbooks, videos, notices, or teachers guide..."
           onkeyup="filterItems()">
       </div>
 
@@ -591,7 +594,8 @@
           <button class="filter-btn" data-type="practise_questions_sets"
             onclick="setTypeFilter('practise_questions_sets')">Practice / Question Sets</button>
           <button class="filter-btn" data-type="solutions" onclick="setTypeFilter('solutions')">Solutions</button>
-          <button class="filter-btn" data-type="teachers_guide" onclick="setTypeFilter('teachers_guide')">Teachers guide</button>
+          <button class="filter-btn" data-type="teachers_guide" onclick="setTypeFilter('teachers_guide')">Teachers
+            guide</button>
           <button class="filter-btn" data-type="videos" onclick="setTypeFilter('videos')">Videos</button>
           <button class="filter-btn" data-type="curriculum" onclick="setTypeFilter('curriculum')">Curriculum</button>
           <button class="filter-btn" data-type="textbook" onclick="setTypeFilter('textbook')">Textbooks</button>
@@ -618,9 +622,9 @@
     <nav class="fnav">
       <a href="index.html#home">Home</a>
       <a href="resources.html" style="color:var(--gold)">Resources</a>
-      <a href="links.html">Useful Links</a>
-      <a href="tools.html">Useful Tools</a>
-      <a href="blog.html">Blog</a>
+      <a href="links.html">Links</a>
+      <a href="tools.html">Tools</a>
+      <a href="labs.html">Virtual Labs</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="fcopy">© 2026 Keshav Poudel. All rights reserved.</div>
@@ -730,19 +734,19 @@
       { title: "SEE Model Set 2 Solution 2080", description: "SEE Class 10 Model Set 2 Solution.", category: "solutions", class: "10", path: "documents/solutions/SEE_Model_Set_2_Solution_2080.pdf", icon: "📂", size: "0.8 MB" },
       { title: "SEE Model Set 3 Solution 2080", description: "SEE Class 10 Model Set 3 Solution.", category: "solutions", class: "10", path: "documents/solutions/SEE_Model_Set_3_Solution_2080.pdf", icon: "📂", size: "0.8 MB" },
       { title: "SEE Solution of All Province", description: "Complete compilation of SEE Class 10 solutions for all provinces.", category: "solutions", class: "10", path: "documents/solutions/SEE_Solution_of_All_Province_and_Grade_Increment_2080.pdf", icon: "📂", size: "5.5 MB" },
-      
-          
+
+
       //textbook
       { title: "विज्ञान तथा प्रविधि कक्षा 8 PartA Textbook नेपाली माध्यम", description: "विज्ञान तथा प्रविधि कक्षा 8 PartA Textbook नेपाली माध्यम", category: "textbook", class: "8", path: "documents/textbook/nepalimedium/विज्ञान_तथा_प्रविधि_कक्षा_8_PartA_Textbook_नेपाली_माध्यम.pdf", icon: "📝", size: "15 MB" },
       { title: "विज्ञान तथा प्रविधि कक्षा 8 PartB Textbook नेपाली माध्यम", description: "विज्ञान तथा प्रविधि कक्षा 8 PartB Textbook नेपाली माध्यम", category: "textbook", class: "8", path: "documents/textbook/nepalimedium/विज्ञान_तथा_प्रविधि_कक्षा_8_PartB_Textbook_नेपाली_माध्यम.pdf", icon: "📝", size: "0.6 MB" },
       { title: "विज्ञान तथा प्रविधि कक्षा 9 Textbook नेपाली माध्यम", description: "विज्ञान तथा प्रविधि कक्षा 9 Textbook नेपाली माध्यम", category: "textbook", class: "9", path: "documents/textbook/nepalimedium/विज्ञान_तथा_प्रविधि_कक्षा_9_Textbook_नेपाली_माध्यम.pdf", icon: "📝", size: "0.6 MB" },
-      
+
       { title: "विज्ञान तथा प्रविधि कक्षा 10 Part A Textbook नेपाली माध्यम", description: "विज्ञान तथा प्रविधि कक्षा 10 Part A Textbook नेपाली माध्यम", category: "textbook", class: "10", path: "documents/textbook/nepalimedium/विज्ञान_तथा_प्रविधि_कक्षा_10_PartA_Textbook_नेपाली_माध्यम.pdf", icon: "📝", size: "18 MB" },
       { title: "विज्ञान तथा प्रविधि कक्षा 10 Part B Textbook नेपाली माध्यम", description: "विज्ञान तथा प्रविधि कक्षा 10 Part B Textbook नेपाली माध्यम", category: "textbook", class: "10", path: "documents/textbook/nepalimedium/विज्ञान_तथा_प्रविधि_कक्षा_10_PartB_Textbook_नेपाली_माध्यम.pdf", icon: "📝", size: "13 MB" },
       { title: "Science and Technology Class 8 Part A Textbook English Medium", description: "Science and Technology Class 8 Part A Textbook English Medium", category: "textbook", class: "8", path: "documents/textbook/englishmedium/Science_and_Technology_8_PartA_English_Medium_Textbook.pdf", icon: "📝", size: "23 MB" },
       { title: "Science and Technology Class 8 Part B Textbook English Medium", description: "Science and Technology Class 8 Part B Textbook English Medium", category: "textbook", class: "8", path: "documents/textbook/englishmedium/Science_and_Technology_8_PartB_English_Medium_Textbook.pdf", icon: "📝", size: "7 MB" },
       { title: "Science and Technology Class 9 Textbook English Medium", description: "Science and Technology Class 9 Textbook English Medium", category: "textbook", class: "9", path: "documents/textbook/englishmedium/Science_and_Technology_9_English_Medium_Textbook.pdf", icon: "📝", size: "22 MB" },
-      
+
       { title: "Science and Technology Class 10 Part A Textbook English Medium", description: "Science and Technology Class 10 Part A Textbook English Medium", category: "textbook", class: "10", path: "documents/textbook/englishmedium/Science_and_Technology_10_PartA_English_Medium_Textbook.pdf", icon: "📝", size: "28 MB" },
       { title: "Science and Technology Class 10 Part B Textbook English Medium", description: "Science and Technology Class 10 Part B Textbook English Medium", category: "textbook", class: "10", path: "documents/textbook/englishmedium/Science_and_Technology_10_PartB_English_Medium_Textbook.pdf", icon: "📝", size: "25 MB" },
       { title: "Science and Technology Class 10 Part C Textbook English Medium", description: "Science and Technology Class 10 Part C Textbook English Medium", category: "textbook", class: "10", path: "documents/textbook/englishmedium/Science_and_Technology_10_PartC_English_Medium_Textbook.pdf", icon: "📝", size: "13 MB" },
@@ -750,9 +754,9 @@
       { title: "Science and Technology Curriculum", description: "आधारभूत तह (४-५)को पाठ्यक्रम २०७८", category: "curriculum", class: "General", path: "documents/curriculum/आधारभूत_तह_(४-५)_को_पाठ्यक्रम_विज्ञान_तथा_प्रविधि_2078.pdf", icon: "📝", size: "6 MB" },
       { title: "Science and Technology Curriculum", description: "आधारभूत तह (६-८)को पाठ्यक्रम २०७९", category: "curriculum", class: "General", path: "documents/curriculum/आधारभूत_तह_(६-८)_को_पाठ्यक्रम_2079_विज्ञान_तथा_प्रविधि.pdf", icon: "📝", size: "1 MB" },
       { title: "Science and Technology Curriculum", description: "माध्यमिक तह (९-१०)को पाठ्यक्रम २०७६", category: "curriculum", class: "General", path: "documents/curriculum/माध्यमिक_तह_(९-१०)_को_पाठ्यक्रम_विज्ञान_तथा_प्रविधि_२०७६.pdf", icon: "📝", size: "९ MB" },
-      
-      
-           // teachers_guide
+
+
+      // teachers_guide
       { title: "TG Grade 8 Science", description: "Teacher Guide for Grade 8 Science.", category: "teachers_guide", class: "8", path: "documents/teachersguide/TG_Grade_8_Science.pdf", icon: "📽️", size: "1.4 MB" },
       { title: "TG Grade 9 Science", description: "Teacher Guide for Grade 9 Science.", category: "teachers_guide", class: "9", path: "documents/teachersguide/TG_Grade_9_Science.pdf", icon: "📽️", size: "1.4 MB" },
       { title: "TG Grade 10 Science", description: "Teacher Guide for Grade 10 Science.", category: "teachers_guide", class: "10", path: "documents/teachersguide/TG_Grade_10_Science.pdf", icon: "📽️", size: "1.4 MB" },
@@ -766,21 +770,21 @@
       { title: "NCED Class 9 Science English Medium", description: "NCED Youtube video PlayList Class 9 Science English Medium", category: "videos", class: "9", path: "https://youtube.com/playlist?list=PLVOHiHZt8InJc14x-X--d6nSVzCpubSGm&si=kj4DOVn8CHWAHqjP", icon: "🎬", size: "YouTube" },
       { title: "NCED Class 8 Science Nepali Medium", description: "NCED Youtube video PlayList Class 8 Science Nepali Medium", category: "videos", class: "8", path: "https://youtube.com/playlist?list=PLVOHiHZt8InKFkAp5__pLoy4CLrRau2sZ&si=BgBvhNXKfARefi3H", icon: "🎬", size: "YouTube" },
       { title: "NCED Class 8 Science English Medium", description: "NCED Youtube video PlayList Class 8 Science Nepali Medium", category: "videos", class: "8", path: "https://youtube.com/playlist?list=PLVOHiHZt8InK0nQCMSniGSwiB0_5rUDIi&si=6wdDdPWevCxPGt5B", icon: "🎬", size: "YouTube" },
-     
+
       { title: "ICT Training of class 10 Day 1", description: "ICT unit of Class 10 Conducted by STAN Lumbini, Day 1,2080 Magh 22, Virtual", category: "videos", class: "10", path: "https://youtube.com/playlist?list=PLVOHiHZt8InK0nQCMSniGSwiB0_5rUDIi&si=6wdDdPWevCxPGt5B", icon: "🎬", size: "YouTube" },
       { title: "ICT Training of class 10 Day 2", description: "ICT unit of Science Class 10 Conducted by STAN Lumbini, Day 2,2080 Magh 23, Virtual", category: "videos", class: "10", path: "https://www.youtube.com/watch?v=IGCnkwVMorY&t=314s", icon: "🎬", size: "YouTube" },
-     
+
       { title: "ICT Training of class 10 Day 3", description: "ICT unit of Class 10 Conducted by STAN Lumbini, Day  3, 2080 Magh 24, Virtual", category: "videos", class: "10", path: "https://www.youtube.com/watch?v=IGCnkwVMorY", icon: "🎬", size: "YouTube" },
       { title: "Opinion on Digital Education and AI", description: "Opinion of Yam Nath Poudel on Digital Education and AI on programme Cyber cafe on NTV Kohalpur ", category: "videos", class: "General", path: "https://www.youtube.com/watch?v=O_VTpmP8WLM&t=5s", icon: "🎬", size: "YouTube" },
       { title: "Farewell programme of Yam Nath Poudel", description: "Farewell programme of Yam Nath Poudel by Sharada S.S., Mainapokhar, Bardiya ", category: "videos", class: "General", path: "https://www.youtube.com/watch?v=4_2ciM9KJx0", icon: "🎬", size: "YouTube" },
-     
+
       { title: "BIHANISAMBAD 2079-11-10  With Yam Nath Poudel", description: "Describing about STAN by President of Lumbini Province Yam Nath Poudel ", category: "videos", class: "General", path: "https://www.youtube.com/watch?v=J2xPyjTPXC0", icon: "🎬", size: "YouTube" },
-      
-      
+
+
       { title: "Pressure & Its Effects", description: "Video demonstration and explanation of pressure principles.", category: "videos", class: "10", path: "https://www.youtube.com/watch?v=GX-OrO8y8L0", icon: "🎬", size: "YouTube" }
     ];
 
-      
+
     let currentType = 'all';
     let currentClass = 'all';
 

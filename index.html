@@ -15,11 +15,12 @@
     :root {
       --ink: #0a0f1e;
       --navy: #0d1b3e;
-      --navy2: #122050;
+      --navy2: #0c101da9;
       --gold: #c8a84b;
       --gold2: #e2c46a;
-      --cream: #f7f2ea;
-      --cream2: #efe8d8;
+      --cream: #0f172a;
+      --cream2: #111a2e;
+      --cream-dark: #0d111a;
       --slate: #4a5568;
       --mist: #8896a5;
       --ease: cubic-bezier(.22, 1, .36, 1);
@@ -43,8 +44,8 @@
 
     body {
       font-family: 'Outfit', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.85);
       overflow-x: hidden
     }
 
@@ -83,10 +84,51 @@
       transition: width .05s linear
     }
 
+    /* ══ TOP BANNER ══ */
+    #top-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background: linear-gradient(90deg, #0f172a, #1e293b);
+      border-bottom: 1px solid rgba(200,168,75,0.25);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1rem, 3vw, 3rem);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .banner-left {
+      font-weight: 500;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .banner-left em {
+      color: var(--gold2);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .banner-right {
+      font-variant-numeric: tabular-nums;
+      color: var(--gold);
+      font-weight: 600;
+      display: flex;
+      gap: 0.8rem;
+    }
+
     /* ══ NAV ══ */
     #nav {
       position: fixed;
-      top: 0;
+      top: 32px; /* Moves below the banner */
       left: 0;
       right: 0;
       z-index: 1000;
@@ -95,11 +137,12 @@
       align-items: center;
       gap: 1.5rem;
       padding: 0 clamp(1rem, 3vw, 3rem);
-      transition: background .3s, border-color .3s;
+      transition: background .3s, border-color .3s, top 0.3s;
       background: #000;
     }
 
     #nav.scrolled {
+      top: 0; /* Nav jumps to top when scrolling */
       background: rgba(10, 15, 30, .97);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(200, 168, 75, .18);
@@ -263,8 +306,7 @@
       display: grid;
       grid-template-columns: 1fr minmax(240px, 30%);
       grid-template-rows: 1fr;
-      padding-top: 60px;
-      /* nav height */
+      padding-top: 92px; /* 60px nav + 32px banner */
       position: relative;
       overflow: hidden;
     }
@@ -372,7 +414,7 @@
 
     .hdesc {
       font-size: clamp(.83rem, 1.2vw, .93rem);
-      color: rgba(255, 255, 255, .5);
+      color: rgba(255, 255, 255, 0.441);
       line-height: 1.85;
       max-width: 420px;
       margin-bottom: .85rem;
@@ -521,7 +563,7 @@
       max-height: 90vh;
       object-fit: contain;
       display: block;
-      opacity: .9;
+      opacity: 1;
       border-radius: 4px;
     }
 
@@ -896,9 +938,9 @@
     }
 
     .tag {
-      background: var(--cream2);
-      border: 1px solid rgba(200, 168, 75, .2);
-      color: var(--navy);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(200, 168, 75, 0.3);
+      color: rgba(255, 255, 255, 0.9);
       font-size: .69rem;
       font-weight: 600;
       padding: 4px 11px;
@@ -910,7 +952,8 @@
 
     .tag:hover {
       background: var(--gold);
-      border-color: var(--gold)
+      border-color: var(--gold);
+      color: var(--ink)
     }
 
     /* ══ ACHIEVEMENTS ══ */
@@ -1840,10 +1883,20 @@
   <div id="mob">
     <a href="index.html#home" onclick="closeMob()">Home</a>
     <a href="resources.html" onclick="closeMob()">Resources</a>
-    <a href="links.html" onclick="closeMob()">Useful Links</a>
-    <a href="tools.html" onclick="closeMob()">Useful Tools</a>
-    <a href="blog.html" onclick="closeMob()">Blog</a>
-    <a href="contact.html" onclick="closeMob()">Contact</a>
+    <a href="links.html" onclick="closeMob()">Links</a>
+    <a href="tools.html" onclick="closeMob()">Tools</a>
+    <a href="labs.html" onclick="closeMob()">Virtual Labs</a>
+    <a href="contact.html" onclick="closeMob()" style="color:var(--gold)">Contact</a>
+  </div>
+
+  <!-- ══ TOP BANNER ══ -->
+  <div id="top-banner">
+    <div class="banner-left">
+      <span>SEE <em>विद्यार्थीहरूलाई शुभकामना!</em></span>
+      <span style="opacity:0.4">|</span>
+      <span>Best wishes to SEE students</span>
+    </div>
+    <div class="banner-right" id="live-clock"></div>
   </div>
 
   <!-- ══ NAV ══ -->
@@ -1855,9 +1908,9 @@
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="resources.html">Resources</a></li>
-      <li><a href="links.html">Useful Links</a></li>
-      <li><a href="tools.html">Useful Tools</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="links.html">Links</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="labs.html">Virtual Labs</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Contact</a>
     <button class="hbtn" id="hbtn" onclick="toggleMob()" aria-label="Menu">
@@ -1934,15 +1987,15 @@
       <div class="sl">Awards<br>Received</div>
     </div>
     <div class="sb">
-      <span class="sn" data-c="10" data-s="+">0</span>
-      <div class="sl">Practice<br>Question Sets</div>
+      <span class="sn" data-c="100" data-s="+">0</span>
+      <div class="sl">Workshops<br>Led</div>
     </div>
   </div>
 
   <!-- ══ ABOUT ══ -->
-  <section id="about" class="sec">
+  <section id="about" class="sec" style="background: #060810">
     <div class="about-visual rv fl">
-      <div class="about-ghost">YP</div>
+      <div class="about-ghost">A B O U T</div>
       <div class="about-card">
         <div class="ac-head">
           <img class="ac-img" src="images/dad1.jpg" alt="Yamnath Poudel" />
@@ -1978,24 +2031,15 @@
           </div>
         </div>
       </div>
-      <div class="mini-grid">
-        <div class="mc rv"><strong>50+</strong><small>Schools Reached</small></div>
-        <div class="mc rv"><strong>100+</strong><small>Workshops Led</small></div>
-        <div class="mc rv"><strong>2k+</strong><small>Teachers Trained</small></div>
-        <div class="mc rv"><strong>50k+</strong><small>Students Reached</small></div>
-      </div>
+
     </div>
 
     <div class="about-txt rv fr">
-      <div class="kicker">About Me</div>
-      <h2 class="sh">Shaping Nepal's <em>Scientific Future</em></h2>
-      <p>As a dedicated science educator and educational innovator, I am committed to revolutionizing science education
-        in Nepal through modern technology and innovative teaching methodologies.</p>
-      <p>With over 25 years of experience, I have led initiatives that bridge the gap between traditional teaching and
-        contemporary learning. As President of the Science Teachers' Association — Lumbini Province, I work to elevate
-        the standard of science education nationwide.</p>
-      <p>My approach combines hands-on experimentation, digital learning tools, and real-world applications to make
-        science engaging and accessible to every student across Nepal.</p>
+      <div class="kicker lt">About Me</div>
+      <h2 class="sh lt">Dedicated to <em>Science Education</em></h2>
+      <p>As a dedicated science educator with over 25 years of experience, I am committed to revolutionizing science
+        learning in Nepal. Through modern technology, hands-on experimentation, and leadership at the Science Teachers'
+        Association (Lumbini), I work to make science engaging and accessible for every student.</p>
       <div class="tags">
         <span class="tag">Science Education</span>
         <span class="tag">Author</span>
@@ -2007,52 +2051,8 @@
     </div>
   </section>
 
-  <!-- ══ ACHIEVEMENTS ══ -->
-  <section id="achievements">
-    <div class="rv">
-      <div class="kicker lt">Impact & Achievements</div>
-      <h2 class="sh lt">A Legacy of <em>Educational Excellence</em></h2>
-    </div>
-    <div class="bento">
-      <div class="bc wide rv">
-        <div class="bi">🏫</div>
-        <h3>Educational Innovation</h3>
-        <p>Pioneered digital learning tools across 50+ schools in Nepal, transforming classrooms into modern science
-          learning hubs connected to the global scientific community.</p>
-        <div class="bstat">50+ <small>schools transformed</small></div>
-      </div>
-      <div class="bc rv">
-        <div class="bi">🏆</div>
-        <h3>National Recognition</h3>
-        <p>Recipient of multiple national awards for excellence in science education and contributions to Nepal's
-          educational reform.</p>
-        <div class="bstat">10+ <small>awards</small></div>
-      </div>
-      <div class="bc rv">
-        <div class="bi">👩‍🏫</div>
-        <h3>Teacher Training</h3>
-        <p>Conducted 100+ workshops training over 2,000 teachers in modern methodologies across Lumbini Province.</p>
-        <div class="bstat">2k+ <small>teachers trained</small></div>
-      </div>
-      <div class="bc rv">
-        <div class="bi">💻</div>
-        <h3>Digital Transformation</h3>
-        <p>Built online learning platforms that reached 50,000+ students during the pandemic ensuring no child was left
-          behind.</p>
-        <div class="bstat">50k+ <small>students reached</small></div>
-      </div>
-      <div class="bc rv">
-        <div class="bi">🧪</div>
-        <h3>Science Association</h3>
-        <p>Leading the Science Teachers' Association of Nepal (Lumbini) to foster a community of scientific inquiry and
-          professional growth.</p>
-        <div class="bstat">Lumbini <small>Province</small></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ══ RESOURCES ══ -->
-  <section id="resources" class="sec" style="background: var(--ink)">
+  <section id="resources" class="sec" style="background: #15161ab1">
     <div class="rv">
       <div class="kicker lt">Digital Library</div>
       <h2 class="sh lt">Educational <em>Resources</em></h2>
@@ -2086,38 +2086,43 @@
     </div>
   </section>
 
-  <!-- ══ BLOG TEASER ══ -->
-  <section id="latest-blog" class="sec" style="background: var(--navy)">
+
+  <!-- ══ VIRTUAL LABS TEASER ══ -->
+  <section id="virtual-labs" class="sec" style="color:var(--navy2)">
     <div class="rv">
-      <div class="kicker lt">Professional Insights</div>
-      <h2 class="sh lt">Latest from the <em>Blog</em></h2>
+      <div class="kicker lt">Interactive Experiments</div>
+      <h2 class="sh lt">Featured Virtual <em>Labs</em></h2>
     </div>
     <div class="blog-grid">
-      <a href="blog/notebooklm-for-teachers.html" class="blog-t-card rv">
-        <div class="badge">Student Edition</div>
-        <div class="meta">March 23, 2026</div>
-        <h3>NotebookLM: Your AI Study Buddy</h3>
-        <p>Transform your research and lesson planning with Google's source-grounded AI assistant.</p>
-        <span class="read-lnk">Learn the Magic →</span>
+      <a href="labs/convex_lens_virtual_lab.html" class="blog-t-card rv"
+        style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 12px rgba(0,0,0,0.1)">
+        <div class="badge" style="background:rgba(200, 168, 75, 0.1); color:var(--gold2)">Physics Simulation</div>
+        <div class="meta" style="color:var(--mist)">Interactive Lab</div>
+        <h3 style="color:#fff">Convex Lens Ray Diagram</h3>
+        <p style="color:rgba(255,255,255,0.5)">Visualize real and virtual image formation by adjusting focal length and
+          object distance in real-time.</p>
+        <span class="read-lnk" style="color:var(--gold2)">Start Experiment →</span>
       </a>
-      <a href="blog/ai-prompting-mastery.html" class="blog-t-card rv">
-        <div class="badge">Student Edition</div>
-        <div class="meta">March 20, 2026</div>
-        <h3>Talk to Robots: Legendry AI Prompting</h3>
-        <p>Master the frameworks to get high-quality results from AI chatbots for school.</p>
-        <span class="read-lnk">Become an AI Master →</span>
+      <a href="labs/ohms_law_lab.html" class="blog-t-card rv"
+        style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 12px rgba(0,0,0,0.1)">
+        <div class="badge" style="background:rgba(200, 168, 75, 0.1); color:var(--gold2)">Electricity Simulation</div>
+        <div class="meta" style="color:var(--mist)">Interactive Lab</div>
+        <h3 style="color:#fff">Ohm's Law Master</h3>
+        <p style="color:rgba(255,255,255,0.5)">Explore the relationship between Voltage, Current, and Resistance with
+          dynamic V-I graphing.</p>
+        <span class="read-lnk" style="color:var(--gold2)">Start Experiment →</span>
       </a>
     </div>
     <div style="text-align:center; margin-top:3rem;">
-      <a href="blog.html" class="bg">View All Articles →</a>
+      <a href="labs.html" class="bg" style="border-color:var(--gold); color:var(--gold)">Explore All Labs →</a>
     </div>
   </section>
 
   <!-- ══ TOOLS TEASER ══ -->
-  <section id="useful-tools" class="sec" style="background:#0a0f1e">
+  <section id="tools" class="sec" style="background: #111215b1; border-top: 1px solid rgba(200, 168, 75, 0.1)">
     <div class="rv">
       <div class="kicker lt">Curated Digital Utilities</div>
-      <h2 class="sh lt">Useful <em>Tools</em></h2>
+      <h2 class="sh lt"><em>Tools</em></h2>
     </div>
     <div class="links-teaser-grid">
       <a href="tools.html?cat=education" class="l-t-card rv">
@@ -2142,71 +2147,9 @@
     </div>
   </section>
 
-  <!-- ══ TRAINING ══ -->
-  <section id="training">
-    <div class="rv">
-      <div class="kicker lt">Professional Development</div>
-      <h2 class="sh lt">Training <em>Programs</em></h2>
-    </div>
-    <div class="tg">
-      <div class="ttabs">
-        <div class="ttab on" onclick="setTab(0)">
-          <div class="tn">01</div>
-          <div class="tt">Digital Teaching Tools</div>
-          <div class="tarr">→</div>
-        </div>
-        <div class="ttab" onclick="setTab(1)">
-          <div class="tn">02</div>
-          <div class="tt">Practical Lab Training</div>
-          <div class="tarr">→</div>
-        </div>
-        <div class="ttab" onclick="setTab(2)">
-          <div class="tn">03</div>
-          <div class="tt">Interactive Learning</div>
-          <div class="tarr">→</div>
-        </div>
-        <div class="ttab" onclick="setTab(3)">
-          <div class="tn">04</div>
-          <div class="tt">STEM Curriculum Design</div>
-          <div class="tarr">→</div>
-        </div>
-      </div>
-      <div class="tpanels rv fr">
-        <div class="tpanel on">
-          <h3>Digital Teaching Tools</h3>
-          <p>Master modern educational software, digital whiteboards, LMS platforms, and multimedia tools to create
-            engaging, technology-enhanced science lessons for any classroom in Nepal.</p>
-          <div class="ptags"><span class="ptag">LMS Platforms</span><span class="ptag">Digital Whiteboards</span><span
-              class="ptag">Video Creation</span><span class="ptag">Online Assessment</span></div>
-        </div>
-        <div class="tpanel">
-          <h3>Practical Lab Training</h3>
-          <p>Hands-on experience with modern laboratory equipment, safety protocols, and experimental design for
-            secondary school science teachers to confidently lead practical lessons.</p>
-          <div class="ptags"><span class="ptag">Lab Safety</span><span class="ptag">Equipment Use</span><span
-              class="ptag">Experiment Design</span><span class="ptag">Student Assessment</span></div>
-        </div>
-        <div class="tpanel">
-          <h3>Interactive Learning Strategies</h3>
-          <p>Evidence-based strategies for engaging students in active, inquiry-based learning. Project-based
-            approaches, collaborative models, and formative assessment for Nepal's classrooms.</p>
-          <div class="ptags"><span class="ptag">Inquiry-Based</span><span class="ptag">Collaborative Models</span><span
-              class="ptag">Project-Based</span><span class="ptag">Formative Assessment</span></div>
-        </div>
-        <div class="tpanel">
-          <h3>STEM Curriculum Design</h3>
-          <p>Design and implement STEM-integrated lesson plans aligned with Nepal's national curriculum. Bridging
-            subjects to prepare students for a technology-driven world.</p>
-          <div class="ptags"><span class="ptag">Lesson Planning</span><span class="ptag">Cross-Subject
-              Integration</span><span class="ptag">National Curriculum</span><span class="ptag">Outcome Mapping</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ══ CONTACT ══ -->
-  <section id="contact">
+  <section id="contact" class="sec" style="background: #0a0f1e">
     <div class="cgrid">
       <div>
         <div class="kicker lt">Get In Touch</div>
@@ -2244,8 +2187,8 @@
         <p>Explore sections of this website or reach out directly through the contact details.</p>
         <div class="qlg">
           <a href="resources.html" class="ql"> Resources</a>
-          <a href="links.html" class="ql"> Useful Links</a>
-          <a href="blog.html" class="ql"> Blog</a>
+          <a href="links.html" class="ql"> Links</a>
+          <a href="labs.html" class="ql"> Virtual Labs</a>
           <a href="mailto:contact@yamnathpoudel.com.np" class="ql"> Email Me</a>
         </div>
       </div>
@@ -2261,9 +2204,9 @@
     <nav class="fnav">
       <a href="#home">Home</a>
       <a href="resources.html">Resources</a>
-      <a href="links.html">Useful Links</a>
-      <a href="tools.html">Useful Tools</a>
-      <a href="blog.html">Blog</a>
+      <a href="links.html">Links</a>
+      <a href="tools.html">Tools</a>
+      <a href="labs.html">Virtual Labs</a>
       <a href="contact.html">Contact</a>
     </nav>
     <div class="fcopy">© 2026 Keshav Poudel. All rights reserved.</div>
@@ -2333,15 +2276,38 @@
     }, { threshold: .4 });
     const sr = document.querySelector('.stats-ribbon');
     if (sr) cr.observe(sr);
+  </script>
 
-    /* training tabs */
-    const tabs = document.querySelectorAll('.ttab'), panels = document.querySelectorAll('.tpanel');
-    function setTab(i) {
-      tabs.forEach(t => t.classList.remove('on'));
-      panels.forEach(p => p.classList.remove('on'));
-      tabs[i].classList.add('on');
-      panels[i].classList.add('on');
+  <script>
+    // Live Clock English/Nepali
+    function updateClock() {
+      const now = new Date();
+      const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+      
+      const toNepali = (num) => {
+        return num.toString().split('').map(d => nepaliDigits[parseInt(d)] || d).join('');
+      };
+
+      const hrs = now.getHours();
+      const mins = now.getMinutes();
+      const secs = now.getSeconds();
+      const ampm = hrs >= 12 ? 'PM' : 'AM';
+      
+      const h12 = hrs % 12 || 12;
+      const pad = (n) => n.toString().padStart(2, '0');
+
+      const timeEN = `${pad(h12)}:${pad(mins)}:${pad(secs)} ${ampm}`;
+      const timeNP = `${toNepali(pad(hrs))}:${toNepali(pad(mins))}:${toNepali(pad(secs))}`;
+
+      document.getElementById('live-clock').innerHTML = `
+        <span style="font-size:0.9em">${timeNP}</span>
+        <span style="opacity:0.3; font-weight:300">|</span>
+        <span>${timeEN}</span>
+      `;
     }
+    
+    updateClock();
+    setInterval(updateClock, 1000);
   </script>
 </body>
 

@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convex Lens — Virtual Lab | Yam Nath Poudel</title>
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --ink: #050810;
+      --gold: #c8a84b;
+      --gold2: #e2c26d;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --font-main: 'Outfit', sans-serif;
+      --font-serif: 'Cormorant Garamond', serif;
+      --bg: #fff;
+      --bg2: #f7f7f5;
+      --t1: #111;
+      --t2: #555;
+      --t3: #999;
+      --ti: #1464a8;
+      --bdr: rgba(0, 0, 0, .1);
+      --bdrm: rgba(0, 0, 0, .18);
+      --fn: 'Outfit', system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    body {
+      font-family: var(--fn);
+      background: #f0f0ee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ══ NAV (Unified) ══ */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 clamp(1rem, 3vw, 3rem);
+      transition: background .3s, border-color .3s;
+      background: #000;
+    }
+
+    #nav.scrolled {
+      background: rgba(10, 15, 30, .97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(200, 168, 75, .18);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold2);
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 28px;
+      width: auto;
+      border-radius: 3.5px;
+      object-fit: contain;
+      border: 1.2px solid rgba(200, 168, 75, .3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: clamp(.5rem, 1.3vw, 1.4rem);
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, .58);
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      position: relative;
+      transition: color .2s;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      flex-shrink: 0;
+      display: inline-block;
+      background: transparent;
+      border: 1px solid rgba(200, 168, 75, .45);
+      color: var(--gold);
+      padding: 6px 16px;
+      border-radius: 3px;
+      font-size: .73rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: all .2s;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .hbtn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+      background: none;
+      border: none;
+    }
+
+    .hbtn span {
+      width: 22px;
+      height: 1.5px;
+      background: rgba(255, 255, 255, .8);
+      display: block;
+      transition: all .28s;
+    }
+
+    /* mobile menu */
+    #mob {
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8rem;
+      transform: translateX(100%);
+      transition: transform .42s var(--ease);
+    }
+
+    #mob.open {
+      transform: translateX(0);
+    }
+
+    #mob a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .7);
+      transition: color .2s;
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hbtn { display: flex; margin-left: auto; }
+    }
+
+    .outer {
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 80px;
+      padding: 0 12px;
+    }
+
+    .lw {
+      background: #fff;
+      border: 1px solid var(--bdr);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(0, 0, 0, .06)
+    }
+
+    .lh {
+      padding: 16px 24px 12px;
+      border-bottom: 1px solid var(--bdr);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .lt {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      letter-spacing: -.5px
+    }
+
+    .ls {
+      font-size: 13px;
+      color: #555;
+      margin-top: 3px
+    }
+
+    .badge {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: #e3f2fd;
+      color: #1e88e5
+    }
+
+    .lb {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      border-bottom: 1px solid var(--bdr)
+    }
+
+    .cc {
+      border-right: 1px solid var(--bdr);
+      background: #f7f7f5;
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      background: #fff;
+      cursor: crosshair;
+      touch-action: none
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      padding: 6px;
+      border-top: 1px solid var(--bdr)
+    }
+
+    .rc {
+      display: flex;
+      flex-direction: column;
+      background: #fff
+    }
+
+    .cg {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--bdr);
+      flex: 1
+    }
+
+    .cg:last-child {
+      border-bottom: none
+    }
+
+    .cl {
+      font-size: 11px;
+      font-weight: 800;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px
+    }
+
+    .cv2 {
+      font-size: 26px;
+      font-weight: 900;
+      color: #111;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+      line-height: 1
+    }
+
+    .cu {
+      font-size: 12px;
+      font-weight: 500;
+      color: #555
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(0, 0, 0, .18);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #111;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1.5px rgba(0, 0, 0, .18);
+      transition: transform .15s;
+      cursor: pointer
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25)
+    }
+
+    .ig {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--bdr);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px
+    }
+
+    .ic {
+      background: #f7f7f5;
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--bdr)
+    }
+
+    .icl {
+      font-size: 10px;
+      font-weight: 800;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 4px
+    }
+
+    .icv {
+      font-size: 18px;
+      font-weight: 900;
+      color: #111
+    }
+
+    .iceq {
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      margin-top: 4px;
+      line-height: 1.5
+    }
+
+    .tb {
+      padding: 20px 24px;
+      background: #fff;
+      border-top: 1px solid var(--bdr)
+    }
+
+    .tb h3 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 12px
+    }
+
+    .tg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px
+    }
+
+    .tsec h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1464a8;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .tsec h4::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 12px;
+      background: #1a73e8;
+      border-radius: 2px
+    }
+
+    .tl {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .tl li {
+      font-size: 13px;
+      color: #555;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5
+    }
+
+    .tl li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #1a73e8;
+      font-weight: 900
+    }
+
+    .fc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px
+    }
+
+    .fc span {
+      background: #f0f4ff;
+      border: 1px solid #d0dcf8;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a3a8f;
+      font-family: monospace
+    }
+
+    .characteristics {
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--bdr);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      background: #f7f7f5;
+    }
+
+    .char-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: #999;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .char-chip {
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+
+    .chip-real {
+      background: #e0f2f1;
+      color: #00695c;
+    }
+
+    .chip-virtual {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .chip-inverted {
+      background: #fff3e0;
+      color: #ef6c00;
+    }
+
+    .chip-upright {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .chip-enlarged {
+      background: #fffde7;
+      color: #f57f17;
+    }
+
+    .chip-diminished {
+      background: #ede7f6;
+      color: #512da8;
+    }
+
+    .chip-special {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    /* ══ FOOTER ══ */
+    footer {
+      background: #050810;
+      padding: clamp(1.5rem, 3vw, 2.4rem) clamp(1.2rem, 5vw, 5rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      border-top: 1px solid rgba(200, 168, 75, .1);
+      width: 100%;
+      margin-top: 48px;
+    }
+
+    .fbrand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--gold2);
+      text-decoration: none;
+    }
+
+    .fbrand img {
+      height: 28px;
+      width: auto;
+      border-radius: 3.5px;
+      object-fit: contain;
+      border: 1px solid rgba(200, 168, 75, .25)
+    }
+
+    .fbrand small {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: .62rem;
+      color: rgba(255, 255, 255, .24);
+      font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-top: .1rem
+    }
+
+    .fnav {
+      display: flex;
+      gap: 1.3rem;
+      flex-wrap: wrap
+    }
+
+    .fnav a {
+      font-size: .7rem;
+      color: rgba(255, 255, 255, .24);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .18s;
+      text-decoration: none;
+    }
+
+    .fnav a:hover {
+      color: var(--gold)
+    }
+
+    .fcopy {
+      font-size: .66rem;
+      color: rgba(255, 255, 255, .17)
+    }
+
+    @media(max-width:680px) {
+      .lb { grid-template-columns: 1fr }
+      .cc { border-right: none; border-bottom: 1px solid var(--bdr) }
+      .ig { grid-template-columns: 1fr 1fr }
+      .tg { grid-template-columns: 1fr }
+      footer { flex-direction: column; align-items: flex-start }
+      .fnav { gap: .8rem }
+    }
+.outer{width:100%;max-width:1100px;}
+.lw{background:#fff;border:1px solid var(--bdr);border-radius:16px;overflow:hidden;box-shadow:0 2px 24px rgba(0,0,0,.06)}
+.lh{padding:16px 24px 12px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.lt{font-size:22px;font-weight:800;color:#111;letter-spacing:-.5px}
+.ls{font-size:13px;color:#555;margin-top:3px}
+.badge{font-size:13px;font-weight:700;padding:6px 16px;border-radius:20px;background:#e3f2fd;color:#1e88e5}
+.lb{display:grid;grid-template-columns:1fr 300px;border-bottom:1px solid var(--bdr)}
+.cc{border-right:1px solid var(--bdr);background:#f7f7f5;display:flex;flex-direction:column;position:relative}
+canvas{display:block;width:100%;background:#fff;cursor:crosshair;touch-action:none}
+.hint{font-size:11px;color:#999;text-align:center;padding:6px;border-top:1px solid var(--bdr)}
+.rc{display:flex;flex-direction:column;background:#fff}
+.cg{padding:14px 20px;border-bottom:1px solid var(--bdr);flex:1}
+.cg:last-child{border-bottom:none}
+.cl{font-size:11px;font-weight:800;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.cv2{font-size:26px;font-weight:900;color:#111;margin-bottom:8px;letter-spacing:-1px;line-height:1}
+.cu{font-size:12px;font-weight:500;color:#555}
+input[type=range]{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(0,0,0,.18);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#111;border:3px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.18);transition:transform .15s;cursor:pointer}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
+.ig{padding:16px 24px;border-bottom:1px solid var(--bdr);display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ic{background:#f7f7f5;border-radius:10px;padding:12px 14px;border:1px solid var(--bdr)}
+.icl{font-size:10px;font-weight:800;color:#999;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.icv{font-size:18px;font-weight:900;color:#111}
+.iceq{font-size:12px;font-weight:600;color:#555;margin-top:4px;line-height:1.5}
+.tb{padding:20px 24px;background:#fff;border-top:1px solid var(--bdr)}
+.tb h3{font-size:13px;font-weight:800;color:#111;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tsec h4{font-size:12px;font-weight:700;color:#1464a8;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.tsec h4::before{content:'';display:inline-block;width:3px;height:12px;background:#1a73e8;border-radius:2px}
+.tl{list-style:none;display:flex;flex-direction:column;gap:4px}
+.tl li{font-size:13px;color:#555;padding-left:14px;position:relative;line-height:1.5}
+.tl li::before{content:'·';position:absolute;left:0;color:#1a73e8;font-weight:900}
+.fc{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.fc span{background:#f0f4ff;border:1px solid #d0dcf8;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:700;color:#1a3a8f;font-family:monospace}
+/* SPECIFIC CHIPS FOR CONVEX LENS */
+.characteristics { padding: 12px 24px; border-bottom: 1px solid var(--bdr); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #f7f7f5; }
+.char-label { font-size: 11px; font-weight: 800; color: #999; text-transform: uppercase; margin-right: 4px; }
+.char-chip { font-weight: 700; padding: 4px 10px; border-radius: 6px; font-size: 11px; }
+.chip-real { background: #e0f2f1; color: #00695c; }
+.chip-virtual { background: #f3e5f5; color: #7b1fa2; }
+.chip-inverted { background: #fff3e0; color: #ef6c00; }
+.chip-upright { background: #e8f5e9; color: #2e7d32; }
+.chip-enlarged { background: #fffde7; color: #f57f17; }
+.chip-diminished { background: #ede7f6; color: #512da8; }
+.chip-special { background: #e3f2fd; color: #1565c0; }
+@media(max-width:680px){.lb{grid-template-columns:1fr}.cc{border-right:none;border-bottom:1px solid var(--bdr)}.ig{grid-template-columns:1fr 1fr}.tg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <!-- Mobile overlay -->
+  <div id="mob">
+    <a href="../index.html#home" onclick="closeMob()">Home</a>
+    <a href="../resources.html" onclick="closeMob()">Resources</a>
+    <a href="../links.html" onclick="closeMob()">Links</a>
+    <a href="../tools.html" onclick="closeMob()">Tools</a>
+    <a href="../labs.html" onclick="closeMob()">Virtual Labs</a>
+    <a href="../contact.html" onclick="closeMob()">Contact</a>
+  </div>
+
+  <!-- ══ NAV ══ -->
+  <nav id="nav">
+    <a class="nav-logo" href="../index.html#home">
+      <img src="../images/logo.svg" alt="YNP Logo" loading="lazy" />
+      Yamnath Poudel
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#home">Home</a></li>
+      <li><a href="../resources.html">Resources</a></li>
+      <li><a href="../links.html">Links</a></li>
+      <li><a href="../tools.html">Tools</a></li>
+      <li><a href="../labs.html" style="color:var(--gold)">Virtual Labs</a></li>
+    </ul>
+    <a href="../contact.html" class="nav-cta">Contact</a>
+    <button class="hbtn" id="hbtn" onclick="toggleMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+<div class="outer">
+  <div class="lw">
+    <div class="lh">
+      <div>
+        <div class="lt">Convex Lens Ray Diagram</div>
+        <div class="ls">Principal Focus · Object Distance · Real vs Virtual Images</div>
+      </div>
+      <div class="badge" id="caseBadge">Real, Inverted Image</div>
+    </div>
+    <div class="lb">
+      <div class="cc">
+        <canvas id="lensCanvas" height="380"></canvas>
+        <div class="hint">&#9654; Drag the object (arrow) or use sliders to adjust focal length and distance</div>
+      </div>
+      <div class="rc">
+        <div class="cg">
+          <div class="cl">Object Distance (u)</div>
+          <div class="cv2"><span id="doVal">250</span> <span class="cu">px</span></div>
+          <input type="range" id="doSlider" min="30" max="480" value="250" step="1">
+        </div>
+        <div class="cg">
+          <div class="cl">Focal Length (f)</div>
+          <div class="cv2"><span id="fVal">120</span> <span class="cu">px</span></div>
+          <input type="range" id="fSlider" min="40" max="200" value="120" step="1">
+        </div>
+        <div class="cg">
+          <div class="cl">Object Height (hₒ)</div>
+          <div class="cv2"><span id="hoVal">60</span> <span class="cu">px</span></div>
+          <input type="range" id="hoSlider" min="10" max="100" value="60" step="1">
+        </div>
+        <div class="cg">
+          <div class="cl">Magnification (m)</div>
+          <div class="cv2" id="magVal">—</div>
+        </div>
+      </div>
+    </div>
+    <div class="characteristics">
+      <span class="char-label">Summary:</span>
+      <span class="char-chip" id="realChip">Real</span>
+      <span class="char-chip" id="orientChip">Inverted</span>
+      <span class="char-chip" id="sizeChip">Enlarged</span>
+      <span class="char-chip" id="posChip">dᵢ > 2f</span>
+    </div>
+    <div class="ig">
+      <div class="ic"><div class="icl">Image Nature</div><div class="icv" id="imgTypeCard">Real</div></div>
+      <div class="ic"><div class="icl">Image Position (v)</div><div class="icv" id="diCard">—</div></div>
+      <div class="ic"><div class="icl">Image Height (hᵢ)</div><div class="icv" id="hiCard">—</div></div>
+      <div class="ic">
+        <div class="icl">Lens Formula</div>
+        <div class="iceq">1/f = 1/v + 1/u<br>m = -v/u</div>
+      </div>
+    </div>
+    <div class="tb">
+      <h3>Key Concepts &amp; Formulas</h3>
+      <div class="tg">
+        <div class="tsec">
+          <h4>Ray Diagram Rules</h4>
+          <ul class="tl">
+            <li>Ray parallel to axis passes through focus.</li>
+            <li>Ray through optical center passes undeviated.</li>
+            <li>Ray through focus becomes parallel to axis.</li>
+            <li>Dashed lines represent virtual extensions.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="tsec">
+            <h4>Essential Formulas</h4>
+            <div class="fc">
+              <span>1/f = 1/v + 1/u</span>
+              <span>m = hᵢ / hₒ</span>
+              <span>P = 1/f (m)</span>
+            </div>
+          </div>
+          <div class="tsec" style="margin-top:12px">
+            <h4>Variable Meanings</h4>
+            <ul class="tl">
+              <li><strong>u</strong> = Object distance &nbsp; <strong>v</strong> = Image distance</li>
+              <li><strong>f</strong> = Focal length &nbsp; <strong>m</strong> = Magnification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <a href="../index.html#home" class="fbrand">
+      <img src="../images/logo.svg" alt="YNP Logo" />
+      <div>Yamnath Poudel<small>Science Educator · Author · Nepal</small></div>
+    </a>
+    <nav class="fnav">
+      <a href="../index.html#home">Home</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../links.html">Links</a>
+      <a href="../tools.html">Tools</a>
+      <a href="../labs.html" style="color:var(--gold)">Virtual Labs</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+    <div class="fcopy">© 2026 Keshav Poudel. All rights reserved.</div>
+  </footer>
+
+  <script>
+    /* mobile menu */
+    let mo = false;
+    function toggleMob() {
+      mo = !mo;
+      document.getElementById('mob').classList.toggle('open', mo);
+      document.getElementById('hbtn').classList.toggle('open', mo);
+      document.body.style.overflow = mo ? 'hidden' : '';
+    }
+    function closeMob() { if (mo) toggleMob(); }
+
+    /* Nav scroll effect */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    const canvas = document.getElementById('lensCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, CX, CY;
+
+    function isDark() { return false; } // Locked to white background theme
+
+    function getColors() {
+      return {
+        axis: 'rgba(0,0,0,0.55)',
+        axisTick: 'rgba(0,0,0,0.35)',
+        lens: 'rgba(50,120,210,0.90)',
+        lensFill: 'rgba(50,120,210,0.07)',
+        obj: '#c85a08',
+        objFill: 'rgba(200,90,8,0.10)',
+        ray1: '#c0392b',
+        ray2: '#1e8449',
+        ray3: '#7d3c98',
+        img: '#1565c0',
+        imgFill: 'rgba(21,101,192,0.10)',
+        imgVirt: '#8e44ad',
+        imgVirtF: 'rgba(142,68,173,0.09)',
+        focus: '#d32f2f',
+        grid: 'rgba(0,0,0,0.04)',
+        axis2f: 'rgba(150,40,40,0.35)',
+        labelBg: 'rgba(255,255,255,0.82)',
+        text: 'rgba(20,20,20,0.80)',
+      };
+    }
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      W = rect.width; H = 400;
+      canvas.width = Math.round(W * devicePixelRatio);
+      canvas.height = Math.round(H * devicePixelRatio);
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+      CX = W / 2; CY = H / 2;
+      draw();
+    }
+
+    let do_ = 250, f_ = 120, ho_ = 60;
+
+    function arrowHead(x, y, angle, size, color) {
+      ctx.save(); ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - size * Math.cos(angle - 0.38), y - size * Math.sin(angle - 0.38));
+      ctx.lineTo(x - size * Math.cos(angle + 0.38), y - size * Math.sin(angle + 0.38));
+      ctx.closePath(); ctx.fill(); ctx.restore();
+    }
+
+    function ray(x1, y1, x2, y2, color, dashed, w = 1.8) {
+      ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = w;
+      if (dashed) ctx.setLineDash([5, 4]);
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      ctx.setLineDash([]);
+      if (!dashed) arrowHead(x2, y2, Math.atan2(y2 - y1, x2 - x1), 9, color);
+      ctx.restore();
+    }
+
+    function drawObjArrow(x, y1, y2, color, fill, lbl, dashed = false) {
+      const top = Math.min(y1, y2), bot = Math.max(y1, y2);
+      ctx.save();
+      ctx.fillStyle = fill; ctx.fillRect(x - 5, top, 10, bot - top);
+      ctx.strokeStyle = color; ctx.lineWidth = dashed ? 1.8 : 3;
+      if (dashed) ctx.setLineDash([6, 3]);
+      ctx.beginPath(); ctx.moveTo(x, bot); ctx.lineTo(x, top); ctx.stroke();
+      ctx.setLineDash([]);
+      arrowHead(x, top, y1 < y2 ? -Math.PI / 2 : Math.PI / 2, dashed ? 7 : 10, color);
+      if (lbl) {
+        const C = getColors();
+        ctx.font = 'bold 12px system-ui';
+        ctx.fillStyle = C.labelBg;
+        ctx.textAlign = 'center'; ctx.fillText(lbl, x, bot + 16);
+      }
+      ctx.restore();
+    }
+
+    function dot(x, y, color, r = 5) {
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = color; ctx.fill();
+    }
+
+    function txt(t, x, y, color, align = 'center', sz = 12, bold = false) {
+      ctx.save();
+      ctx.font = (bold ? '800 ' : '500 ') + sz + 'px system-ui';
+      ctx.textAlign = align;
+      ctx.fillStyle = color; ctx.fillText(t, x, y);
+      ctx.restore();
+    }
+
+    function draw() {
+      const C = getColors();
+      ctx.clearRect(0, 0, W, H); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+
+      ctx.strokeStyle = C.grid; ctx.lineWidth = 0.5;
+      for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      ctx.strokeStyle = C.axis; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(0, CY); ctx.lineTo(W, CY); ctx.stroke();
+      txt('Principal Axis', W - 10, CY - 10, C.axis, 'right', 11, true);
+
+      const lH = 140, lw = 20;
+      ctx.fillStyle = C.lensFill; ctx.strokeStyle = C.lens; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(CX, CY - lH);
+      ctx.bezierCurveTo(CX + lw, CY - lH / 2, CX + lw, CY + lH / 2, CX, CY + lH);
+      ctx.bezierCurveTo(CX - lw, CY + lH / 2, CX - lw, CY - lH / 2, CX, CY - lH);
+      ctx.fill(); ctx.stroke();
+
+      const fL = CX - f_, fR = CX + f_, f2L = CX - 2 * f_, f2R = CX + 2 * f_;
+      dot(fL, CY, C.focus, 5); dot(fR, CY, C.focus, 5);
+      txt('F', fL, CY + 18, C.focus, 'center', 14, true);
+      txt('F\'', fR, CY + 18, C.focus, 'center', 14, true);
+      txt('2F', f2L, CY + 18, C.axis2f, 'center', 12, true);
+      txt('2F\'', f2R, CY + 18, C.axis2f, 'center', 12, true);
+
+      const objX = CX - do_;
+      const tipY = CY - ho_;
+
+      const di = 1 / (1 / f_ - 1 / do_);
+      const hi = -(di / do_) * ho_;
+      const imgX = CX + di;
+      const isReal = di > 0;
+
+      // Rays
+      ray(objX, tipY, CX, tipY, C.ray1, false);
+      if (isReal) {
+        const sl = (CY - tipY) / (fR - CX);
+        const ex = Math.min(W - 10, imgX + 100);
+        ray(CX, tipY, ex, tipY + sl * (ex - CX), C.ray1, false);
+      } else {
+        const sl = (CY - tipY) / (fR - CX);
+        const ex = Math.min(W - 10, CX + 300);
+        ray(CX, tipY, ex, tipY - sl * (ex - CX), C.ray1, false);
+        ray(CX, tipY, Math.max(10, imgX - 50), tipY + sl * (imgX - 50 - CX), C.ray1, true);
+      }
+
+      ray(objX, tipY, CX, CY, C.ray2, false);
+      const ex2 = isReal ? Math.min(W - 10, imgX + 100) : Math.min(W - 10, CX + 300);
+      ray(CX, CY, ex2, CY + (CY - tipY) / (CX - objX) * (ex2 - CX), C.ray2, false);
+      if (!isReal) ray(CX, CY, Math.max(10, imgX - 50), CY + (CY - tipY) / (CX - objX) * (imgX - 50 - CX), C.ray2, true);
+
+      if (!isNaN(imgX) && isFinite(imgX) && imgX > 5 && imgX < W - 5) {
+        const ic = isReal ? C.img : C.imgVirt, icf = isReal ? C.imgFill : C.imgVirtF;
+        drawObjArrow(imgX, CY + hi, CY, ic, icf, isReal ? 'Real Image' : 'Virtual Image', !isReal);
+      }
+
+      drawObjArrow(objX, tipY, CY, C.obj, C.objFill, 'Object');
+      updateUI(di, hi);
+    }
+
+    function updateUI(di, hi) {
+      document.getElementById('doVal').textContent = Math.round(do_);
+      document.getElementById('fVal').textContent = Math.round(f_);
+      document.getElementById('hoVal').textContent = Math.round(ho_);
+
+      if (!isFinite(di)) {
+        document.getElementById('diCard').textContent = '∞';
+        document.getElementById('hiCard').textContent = '∞';
+        document.getElementById('magVal').textContent = '∞';
+        document.getElementById('imgTypeCard').textContent = 'At Infinity';
+        document.getElementById('caseBadge').textContent = 'Object at F';
+        return;
+      }
+
+      const M = -(di / do_), isReal = di > 0;
+      document.getElementById('diCard').textContent = Math.abs(Math.round(di)) + ' px';
+      document.getElementById('hiCard').textContent = Math.abs(Math.round(hi)) + ' px';
+      document.getElementById('magVal').textContent = Math.abs(M).toFixed(2);
+      document.getElementById('imgTypeCard').textContent = isReal ? 'Real' : 'Virtual';
+
+      const realChip = document.getElementById('realChip');
+      realChip.textContent = isReal ? 'Real' : 'Virtual';
+      realChip.className = 'char-chip ' + (isReal ? 'chip-real' : 'chip-virtual');
+
+      const orientChip = document.getElementById('orientChip');
+      orientChip.textContent = isReal ? 'Inverted' : 'Upright';
+      orientChip.className = 'char-chip ' + (isReal ? 'chip-inverted' : 'chip-upright');
+
+      const am = Math.abs(M);
+      const sizeChip = document.getElementById('sizeChip');
+      sizeChip.textContent = am > 1.05 ? 'Enlarged' : am < 0.95 ? 'Diminished' : 'Same';
+      sizeChip.className = 'char-chip ' + (am > 1.05 ? 'chip-enlarged' : am < 0.95 ? 'chip-diminished' : 'chip-same');
+
+      let caseStr;
+      if (do_ > 2 * f_ + 5) caseStr = 'Object beyond 2F';
+      else if (do_ >= 2 * f_ - 5) caseStr = 'Object at 2F';
+      else if (do_ > f_ + 5) caseStr = 'Object between F and 2F';
+      else if (do_ >= f_ - 5) caseStr = 'Object at F';
+      else caseStr = 'Object inside F';
+      document.getElementById('caseBadge').textContent = caseStr;
+
+      document.getElementById('posChip').textContent = isReal ? (di > 2 * f_ ? 'v > 2f' : 'f < v < 2f') : 'v < 0';
+    }
+
+    document.getElementById('doSlider').addEventListener('input', e => { do_ = +e.target.value; draw(); });
+    document.getElementById('fSlider').addEventListener('input', e => { f_ = +e.target.value; draw(); });
+    document.getElementById('hoSlider').addEventListener('input', e => { ho_ = +e.target.value; draw(); });
+
+    window.addEventListener('resize', resize);
+    resize();
+  </script>
+</body>
+
+</html>
