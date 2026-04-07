@@ -86,22 +86,22 @@
 
     /* ══ TOP BANNER ══ */
     #top-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 32px;
+      position: relative;
+      min-height: 32px;
+      height: auto;
       background: linear-gradient(90deg, #0f172a, #1e293b);
-      border-bottom: 1px solid rgba(200,168,75,0.25);
+      border-bottom: 1px solid rgba(200, 168, 75, 0.25);
       z-index: 1001;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 clamp(1rem, 3vw, 3rem);
+      padding: 0.5rem clamp(1rem, 3vw, 3rem);
       font-family: 'Outfit', sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.03em;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255, 255, 255, 0.9);
+      flex-wrap: wrap;
+      gap: 0.8rem;
     }
 
     .banner-left {
@@ -127,8 +127,8 @@
 
     /* ══ NAV ══ */
     #nav {
-      position: fixed;
-      top: 32px; /* Moves below the banner */
+      position: sticky;
+      top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
@@ -142,7 +142,6 @@
     }
 
     #nav.scrolled {
-      top: 0; /* Nav jumps to top when scrolling */
       background: rgba(10, 15, 30, .97);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(200, 168, 75, .18);
@@ -306,7 +305,6 @@
       display: grid;
       grid-template-columns: 1fr minmax(240px, 30%);
       grid-template-rows: 1fr;
-      padding-top: 92px; /* 60px nav + 32px banner */
       position: relative;
       overflow: hidden;
     }
@@ -1740,6 +1738,21 @@
 
     /* ══ RESPONSIVE ══ */
     @media(max-width:900px) {
+      /* banner stacking */
+      #top-banner {
+        justify-content: center;
+        text-align: center;
+      }
+      .banner-left {
+        justify-content: center;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .banner-right {
+        justify-content: center;
+        width: 100%;
+      }
 
       /* nav: hide links, show hamburger */
       .nav-links {
@@ -2283,7 +2296,7 @@
     function updateClock() {
       const now = new Date();
       const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-      
+
       const toNepali = (num) => {
         return num.toString().split('').map(d => nepaliDigits[parseInt(d)] || d).join('');
       };
@@ -2292,7 +2305,7 @@
       const mins = now.getMinutes();
       const secs = now.getSeconds();
       const ampm = hrs >= 12 ? 'PM' : 'AM';
-      
+
       const h12 = hrs % 12 || 12;
       const pad = (n) => n.toString().padStart(2, '0');
 
@@ -2305,7 +2318,7 @@
         <span>${timeEN}</span>
       `;
     }
-    
+
     updateClock();
     setInterval(updateClock, 1000);
   </script>
