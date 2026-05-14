@@ -593,6 +593,8 @@
           <button class="filter-btn active" data-type="all" onclick="setTypeFilter('all')">All Types</button>
           <button class="filter-btn" data-type="practise_questions_sets"
             onclick="setTypeFilter('practise_questions_sets')">Practice / Question Sets</button>
+          <button class="filter-btn" data-type="notes"
+            onclick="setTypeFilter('notes')">Notes</button>
           <button class="filter-btn" data-type="solutions" onclick="setTypeFilter('solutions')">Solutions</button>
           <button class="filter-btn" data-type="teachers_guide" onclick="setTypeFilter('teachers_guide')">Teachers
             guide</button>
@@ -664,15 +666,18 @@
      * {
      *   title: "Name of File",
      *   description: "Brief description of what it is",
-     *   category: "curriculum", // Choose: practise_questions_sets, solutions, teachers_guide, videos, curriculum, textbook, misc, notice
+     *   category: "curriculum", // Choose: practise_questions_sets,notes, solutions, teachers_guide, videos, curriculum, textbook, misc, notice
      *   class: "10", // Choose: 10, 9, 8, General
      *   path: "documents/curriculum/filename.pdf", 
-     *   icon: "📜", // Choose: 📜(Curriculum), 📕(Book), 📂(Solution), 📽️(Teachers Guide), 🎬(Video), 📊(Misc), 🔔(Notice)
+     *   icon: "📜", // Choose: 📜(Curriculum), 📕(Book), 📂(Solution),Notes📄, 📽️(Teachers Guide), 🎬(Video), 📊(Misc), 🔔(Notice)
      *   size: "1.2 MB"
      * },
      */
     const resources = [
       // Questions
+     // { title: "notes", description: "notes", category: "notes", class: "10", path: "documents/notes/notes.pdf", icon: "📄", size: "0.5 MB" },
+
+
       { title: "विद्यालय तहमा पठनपाठन सञ्चालन तथा व्यवस्थापन सम्वन्धमा", description: "शनिवार र आइतवार सार्वजनिक विदा भएको सन्दर्भमा विद्यालय तहमा पठनपाठन सञ्चालनbतथा व्यवस्थापन सम्वन्धमा", category: "notice", class: "General", path: "notice/शनिवार_र_आइतवार_सार्वजनिक_विदा_भएको_सन्दर्भमा_विद्यालय_तहमा_पठनपाठन_सञ्चालन_तथा_व्यवस्थापन_सम्वन्धमा.pdf", icon: "🔔", size: "0.5 MB" },
       
       { title: "नेपाल सरकारको नीति तथा कार्यक्रम 2083-01-28", description: "नेपाल सरकारको नीति तथा कार्यक्रम 2083-01-28", category: "notice", class: "General", path: "notice/फाइनल_नीति_तथा_कार्यक्रम_20830128.pdf", icon: "🔔", size: "0.5 MB" },
